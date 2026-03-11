@@ -9,7 +9,7 @@ Simple full-stack AI voice generator using:
 ## Project structure
 
 - `frontend/` - static web UI
-- `backend/` - FastAPI application and dependencies
+- `backend/` - FastAPI application
 - `audio/` - generated WAV files
 - `models/` - model cache/storage directory
 
@@ -18,9 +18,7 @@ Simple full-stack AI voice generator using:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-cd backend
-pip install -r requirements.txt
-cd ..
+pip install -r backend/requirements.txt
 uvicorn backend.main:app --reload
 ```
 
@@ -30,13 +28,13 @@ Open `http://127.0.0.1:8000`.
 
 ### `POST /generate`
 
-Request body:
+Request:
 
 ```json
 { "text": "Hello from AI voice generator" }
 ```
 
-Response body:
+Response:
 
 ```json
 {
@@ -45,5 +43,3 @@ Response body:
   "filename": "<generated-file>.wav"
 }
 ```
-
-The frontend sends text to `/generate` using `fetch`, then uses `audio_url` to play audio in the HTML audio player or download the file.

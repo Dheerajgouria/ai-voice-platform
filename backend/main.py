@@ -53,7 +53,7 @@ def get_tts_engine() -> TTS:
     if TTS is None:
         raise HTTPException(
             status_code=500,
-            detail="Coqui TTS is not installed. Run: pip install -r requirements.txt",
+            detail="Coqui TTS is not installed. Run: pip install -r backend/requirements.txt",
         )
 
     if _tts_engine is None:
