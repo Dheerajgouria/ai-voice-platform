@@ -1,46 +1,45 @@
-# AI Voice Generator (Auth + XTTS + History)
+# AI Voice Generator
 
-Full-stack voice generator with:
+Simple full-stack AI voice generator using:
 
-- FastAPI backend
-- SQLite user login system
-- Coqui TTS + XTTS voice cloning
-- Tailwind frontend dashboard
-- Generated audio history per user
+- **Frontend:** HTML + Tailwind CSS + JavaScript
+- **Backend:** FastAPI
+- **TTS Model:** Coqui TTS
 
 ## Project structure
 
-- `frontend/` - login + generation dashboard UI
-- `backend/` - FastAPI app and dependencies
-- `audio/` - generated WAV files and uploaded speaker samples
-- `models/` - model cache directory
+- `frontend/` - static web UI
+- `backend/` - FastAPI application
+- `audio/` - generated WAV files
+- `models/` - model cache/storage directory
 
 ## Run locally
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-cd backend
-pip install -r requirements.txt
-cd ..
+pip install -r backend/requirements.txt
 uvicorn backend.main:app --reload
 ```
 
 Open `http://127.0.0.1:8000`.
 
-## Main API endpoints
+## API
 
-- `POST /auth/register` - create user account
-- `POST /auth/login` - login and get Bearer token
-- `POST /generate` - generate audio (default TTS or XTTS cloning)
-- `GET /history` - authenticated generated audio history
-- `GET /audio/{filename}` - serve generated WAV file
+### `POST /generate`
 
-## Voice cloning (XTTS)
+Request:
 
-For cloning, send multipart form data to `/generate`:
+```json
+{ "text": "Hello from AI voice generator" }
+```
 
-- `text` (required)
-- `speaker_audio` (required for clone mode)
+Response:
 
-The frontend does this automatically when **Voice Mode = Clone voice with XTTS**.
+```json
+{
+  "message": "Audio generated successfully.",
+  "audio_url": "/audio/<generated-file>.wav",
+  "filename": "<generated-file>.wav"
+}
+```
